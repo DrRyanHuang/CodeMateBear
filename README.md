@@ -24,3 +24,30 @@
 <i>Loved the project? Please consider forking the project to help it improve!</i>🌟
 
 </div>
+
+
+
+This project leverages the ERNIE Bot to implement a recommendation system. It crawls Github user and repository information, feeds it into the large model, and allows the model to extract keywords. Based on these keywords, it searches for projects on Github and recommends them to users in the order of the most stars, most forks, and best matches.
+
+
+### Demo Showcase 🎥🌟
+
+<div align="center">
+  <img alt="LOGO" src="imgs/1.png" width="18%"> </img>
+  <img alt="LOGO" src="imgs/3.png" width="18%"> </img>
+  <img alt="LOGO" src="imgs/2.png" width="18%"> </img>
+  <img alt="LOGO" src="imgs/4.png" width="18%"> </img>
+</div>
+
+
+
+### How to run 🚀
+
+```
+python3 -mpip install -r requirements.txt
+python3 main.py
+```
+
+- `utils.py` contains a collection of small utility functions.
+- `github_api.py` contains classes and functions for scraping Github information.
+- `test_agently.py` 和 `test_github_api.py` are test scripts, with the former testing Agently and the latter verifying the accuracy of Github information scraping
