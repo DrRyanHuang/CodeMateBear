@@ -1,4 +1,3 @@
-
 # 这是单元测试类
 import unittest
 from github_api import GithubUser
@@ -22,8 +21,7 @@ class TestGithubUserDrRyanHuang(unittest.TestCase):
         self.assertEqual(self.user.username, self.name)
 
     def test_repositories_num(self):
-        self.assertEqual(self.user.repositories_num,
-                         self.repositories_num)
+        self.assertEqual(self.user.repositories_num, self.repositories_num)
 
     def test_stars_num(self):
         self.assertEqual(self.user.stars_num, self.stars_num)
@@ -63,8 +61,8 @@ class TestGithubUserCharlesChrismann(TestGithubUserDrRyanHuang):
         self.name = "Charles-Chrismann"
         self.repositories_num = 35
         self.stars_num = 24
-        self.followers_num = '3.9k'
-        self.following_num = '97.5k'
+        self.followers_num = "3.9k"
+        self.following_num = "97.5k"
 
 
 class TestGithubUserKaimingHe(TestGithubUserDrRyanHuang):
@@ -74,7 +72,7 @@ class TestGithubUserKaimingHe(TestGithubUserDrRyanHuang):
         self.name = "KaimingHe"
         self.repositories_num = 2
         self.stars_num = 20
-        self.followers_num = '12.6k'
+        self.followers_num = "12.6k"
         self.following_num = 0
 
 
@@ -89,5 +87,5 @@ class TestGithubUserSigureMo(TestGithubUserDrRyanHuang):
         self.following_num = 55
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

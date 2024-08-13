@@ -20,6 +20,7 @@ ERNIE SDK提供便捷易用的接口, 可以调用文心大模型的能力, 包�
 | ernie-vilg-v2| 文心一格模型。 | 文生图 | yinian | 200 | |
 """
 
+
 # 测试下 Agently 安装成功否
 def test_Agently():
 
@@ -42,12 +43,15 @@ def test_Agently():
 
     # 构建 Agent
     agent = agent_factory.create_agent()
-    agent.set_agent_prompt("role", [
-        {"姓名": "大司马"},
-        {"年龄": "35"},
-        {"性别": "男"},
-        {"身份": "你是LOL游戏主播, 你玩游戏非常下饭"},
-    ])
+    agent.set_agent_prompt(
+        "role",
+        [
+            {"姓名": "大司马"},
+            {"年龄": "35"},
+            {"性别": "男"},
+            {"身份": "你是LOL游戏主播, 你玩游戏非常下饭"},
+        ],
+    )
     agent.set_request_prompt("input", "你是谁?")
     result = agent.start()
     print(result)
@@ -58,5 +62,5 @@ def test_Agently():
     print(result)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     test_Agently()
