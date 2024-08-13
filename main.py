@@ -3,6 +3,7 @@ import Agently
 from github_api import GithubUser, GithubRepo, GithubSearch
 from utils import get_token
 import random
+from pprint import pprint
 
 TOP_K = 5
 FILTER_KEYWORDS_CONTENTS = [
@@ -103,8 +104,9 @@ def github_search_from_keywords(inputs, storage):
     for keyword in keywords_filtered[:2]:
         search_out += GithubSearch(keyword).get_n_repos(1)
 
+    search_out = [GithubUser.BASE_URL + item for item in search_out]
     print("推荐结果:")
-    print(search_out)
+    pprint(search_out)
 
 
 (
@@ -119,5 +121,5 @@ def github_search_from_keywords(inputs, storage):
     #     .connect_to("generate_background")
 )
 
-# 运行一下试试
+# 运行一下
 workflow.start()

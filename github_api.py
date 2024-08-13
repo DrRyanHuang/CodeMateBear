@@ -1,9 +1,9 @@
-
 """
 没想到 Github 的个人主页是静态网站, 本项目主要用 xpath 来解析, 这一版目前先将 xpath 硬编码在代码中
 不处理私有仓库
 # https://pip.baidu.com/pypi/simple
 """
+
 import requests as r
 from bs4 import BeautifulSoup
 from lxml import etree
@@ -21,7 +21,7 @@ class GithubUser:
     def __init__(self, username, headers=None):
 
         self.username = username
-        self.base_url = f'{self.BASE_URL}/{username}'
+        self.base_url = f"{self.BASE_URL}/{username}"
         self.page_repo_url = f"{self.BASE_URL}/{username}?page=%s&tab=repositories"
 
         if headers is None:
@@ -77,14 +77,16 @@ class GithubUser:
     def get_repositories_num(self):
         try:
             # 通常来说第一个是repo数量
-            span_text = self.soup.find('span', class_='Counter').text
+            span_text = self.soup.find("span", class_="Counter").text
             return int(span_text)
         except:
             return -1
 
     def get_stars_num(self):
         # 使用XPath表达式定位元素
-        xpath_expression = "/html/body/div[1]/div[4]/main/div[1]/div/div/div[2]/div/nav/a[5]/span"
+        xpath_expression = (
+            "/html/body/div[1]/div[4]/main/div[1]/div/div/div[2]/div/nav/a[5]/span"
+        )
         return self._get_num_by_xpath(xpath_expression)
 
     def get_followers_num(self):
@@ -93,7 +95,8 @@ class GithubUser:
         # return self._get_num_by_xpath(xpath_expression)
         # <span class="text-bold color-fg-default">12.6k</span>
         followers_following = self.soup.find_all(
-            'span', class_='text-bold color-fg-default')
+            "span", class_="text-bold color-fg-default"
+        )
         if not followers_following:  # 要有都有, 俩个都有
             return -1
         followers = followers_following[0].text
@@ -108,7 +111,8 @@ class GithubUser:
         # followers_following = self.soup.find_all('span', class_='text-bold color-fg-default')
         # return int(followers_following[1].text)
         followers_following = self.soup.find_all(
-            'span', class_='text-bold color-fg-default')
+            "span", class_="text-bold color-fg-default"
+        )
         if not followers_following:  # 要有都有, 俩个都有
             return -1
         following = followers_following[1].text
@@ -131,7 +135,7 @@ class GithubUser:
             if repos_num >= self.repositories_num:
                 break
 
-        repos_list.sort(key=lambda x: x['last_update'], reverse=True)
+        repos_list.sort(key=lambda x: x["last_update"], reverse=True)
         return repos_list
 
     def _get_1page_public_repos(self, page):
@@ -145,9 +149,12 @@ class GithubUser:
         page_resp.encoding = "utf-8"
         page_soup = BeautifulSoup(page_resp.text, "html.parser")
 
-        repo_ul = page_soup.find_all("ul", attrs={
-            "data-filterable-for": "your-repos-filter",
-            "data-filterable-type": "substring"}
+        repo_ul = page_soup.find_all(
+            "ul",
+            attrs={
+                "data-filterable-for": "your-repos-filter",
+                "data-filterable-type": "substring",
+            },
         )
         repo_info_1page = []
         if len(repo_ul):
@@ -163,23 +170,24 @@ class GithubUser:
     def _get_repo_info_from_li(self, li):
 
         name = li.a.text.strip()
-        href = li.a['href']
+        href = li.a["href"]
         forked = li.find("span", class_="f6 color-fg-muted mb-1")
-        description = li.find_all("p")[0].text.strip() if li.p else ''
+        description = li.find_all("p")[0].text.strip() if li.p else ""
         language = ""
         _license = ""
-        last_update = li.find(
-            "relative-time").text.strip() if li.find("relative-time") else ""
-        last_update = datetime.strptime(last_update, '%b %d, %Y')
+        last_update = (
+            li.find("relative-time").text.strip() if li.find("relative-time") else ""
+        )
+        last_update = datetime.strptime(last_update, "%b %d, %Y")
 
         repo_info = {
-            'name': name,
-            'href': href,
-            'forked': forked,
-            'description': description,
-            'language': language,
-            'license': _license,
-            'last_update': last_update,
+            "name": name,
+            "href": href,
+            "forked": forked,
+            "description": description,
+            "language": language,
+            "license": _license,
+            "last_update": last_update,
         }
         return repo_info
 
@@ -246,7 +254,10 @@ class GithubRepo:
 
     def _get_repo_readme(self, soup):
         readme = soup.find_all(
-            "article", class_="markdown-body entry-content container-lg", itemprop="text")
+            "article",
+            class_="markdown-body entry-content container-lg",
+            itemprop="text",
+        )
 
         if len(readme):
             readme = readme[0]
@@ -291,9 +302,7 @@ class GithubSearch:
         else:
             self._type = _type.lower()
 
-        self.url = self.BASE_URL.format(
-            query,
-            self._type, self.SORT_BY_BEST_MATCH)
+        self.url = self.BASE_URL.format(query, self._type, self.SORT_BY_BEST_MATCH)
 
         if headers is None:
             self.headers = self.DEFAULT_HEADERS
@@ -333,6 +342,4 @@ class GithubSearch:
 if __name__ == "__main__":
     # REPO_HREF = "SigureMo/nyakku.moe"
     # print(GithubRepo(REPO_HREF).href)
-    print(
-        GithubSearch("paddlepaddle").get_n_repos(4)
-    )
+    print(GithubSearch("paddlepaddle").get_n_repos(4))
