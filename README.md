@@ -27,7 +27,7 @@
 
 
 
-This project leverages the ERNIE Bot to implement a recommendation system. It crawls Github user and repository information, feeds it into the large model, and allows the model to extract keywords. Based on these keywords, it searches for projects on Github and recommends them to users in the order of the most stars, most forks, and best matches.
+This project leverages the ERNIE Bot to implement a recommendation system. 🤖 It crawls GitHub user and repository information, feeds it into the large language model, and allows the model to extract relevant keywords. 🔍 Based on these keywords, it searches for projects on GitHub and recommends them to users in the order of the most stars, most forks, and best matches. 🌟🍴
 
 
 ### Demo Showcase 🎥🌟
@@ -43,11 +43,25 @@ This project leverages the ERNIE Bot to implement a recommendation system. It cr
 
 ### How to run 🚀
 
+Add your AISTUDIO [**accessToken**](https://aistudio.baidu.com/account/accessToken) to `token.txt` 
+
 ```
 python3 -mpip install -r requirements.txt
 python3 main.py
 ```
 
-- `utils.py` contains a collection of small utility functions.
-- `github_api.py` contains classes and functions for scraping Github information.
-- `test_agently.py` 和 `test_github_api.py` are test scripts, with the former testing Agently and the latter verifying the accuracy of Github information scraping
+- `utils.py` contains a collection of small utility functions. 🛠️
+- `github_api.py` contains classes and functions for scraping GitHub information. 🕷️
+- `test_agently.py` 和 `test_github_api.py` are test scripts, with the former testing `Agently` and the latter verifying the accuracy of GitHub information scraping. ✅
+
+
+### TO DO LIST ⏰
+
+- [x] GitHub information crawling
+- [x] GitHub search behavior simulation
+- [x] GitHub user information analysis
+- [x] GitHub repository analysis
+- [x] Support AISTUDIO accessToken
+- [x] Support Qianfan accessToken
+- [ ] Add offline database
+- [ ] Analyze user-starred repositories

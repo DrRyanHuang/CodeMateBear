@@ -1,4 +1,5 @@
 requests
 lxml
 bs4
-Agently
+Agently==3.3.4
+sseclient   # For Python3.10
