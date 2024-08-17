@@ -3,3 +3,4 @@ lxml
 bs4
 Agently==3.3.4
 sseclient   # For Python3.10
+numpy
