@@ -1,5 +1,6 @@
 import json
 import Agently
+from utils import get_token, get_qianfan_token
 
 """
 ERNIE SDK提供便捷易用的接口, 可以调用文心大模型的能力, 包含文本创作、通用对话、语义向量、AI作图等。
@@ -22,11 +23,10 @@ ERNIE SDK提供便捷易用的接口, 可以调用文心大模型的能力, 包�
 
 
 # 测试下 Agently 安装成功否
-def test_Agently():
+def test_Agently_aistudio():
 
     # 读取 token
-    with open("token.txt") as f:
-        token = f.read().strip()
+    token = get_token()
     # print(token)
 
     # 全局配置
@@ -62,5 +62,44 @@ def test_Agently():
     print(result)
 
 
+def test_Agently_qianfan():
+
+    # 全局配置
+    agent_factory = (
+        Agently.AgentFactory()
+        .set_settings("current_model", "Qianfan")
+        .set_settings("model.Qianfan.auth", {
+            "access_key": get_qianfan_token()[0],
+            "secret_key": get_qianfan_token()[1],
+        })
+        # <---- 修改模型
+        .set_settings("model.ERNIE.options", {"model": "ernie-lite"})
+    )
+    agent = agent_factory.create_agent()
+    result = agent.input("你好, 你是谁?").start()
+    print(result)
+
+    # 构建 Agent
+    agent = agent_factory.create_agent()
+    agent.set_agent_prompt(
+        "role",
+        [
+            {"姓名": "大司马"},
+            {"年龄": "35"},
+            {"性别": "男"},
+            {"身份": "你是LOL游戏主播, 你玩游戏非常下饭"},
+        ],
+    )
+    agent.set_request_prompt("input", "你是谁?")
+    result = agent.start()
+    print(result)
+
+    # 真的记住了吗？
+    agent.set_request_prompt("output", "你的身份")
+    result = agent.start()
+    print(result)
+
+
 if __name__ == "__main__":
-    test_Agently()
+    test_Agently_aistudio()
+    test_Agently_qianfan()

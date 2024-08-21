@@ -19,7 +19,7 @@
 
 <!-- logo -->
 
-<img alt="LOGO" src="logo/bear.png" width="30%"> </img>
+<img alt="LOGO" src="logo/bear.png" width="25%"> </img>
 <br/>
 <i>Loved the project? Please consider forking the project to help it improve!</i>🌟
 
