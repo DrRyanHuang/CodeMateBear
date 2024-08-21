@@ -43,7 +43,7 @@ This project leverages the ERNIE Bot to implement a recommendation system. 🤖 
 
 ### How to run 🚀
 
-Add your AISTUDIO [**accessToken**](https://aistudio.baidu.com/account/accessToken) to `token.txt` 
+Add your AISTUDIO or QIANFAN [**accessToken**](https://aistudio.baidu.com/account/accessToken) to `token.txt` / `qianfan_token.txt`
 
 ```
 python3 -mpip install -r requirements.txt
