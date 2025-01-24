@@ -35,7 +35,6 @@ This project leverages the ERNIE Bot to implement a recommendation system. 🤖 
 <div align="center">
   <img alt="LOGO" src="imgs/1.png" width="18%"> </img>
   <img alt="LOGO" src="imgs/3.png" width="18%"> </img>
-  <img alt="LOGO" src="imgs/2.png" width="18%"> </img>
   <img alt="LOGO" src="imgs/4.png" width="18%"> </img>
 </div>
 
